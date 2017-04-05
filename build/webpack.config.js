@@ -1,7 +1,7 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
 
-var config = {
+module.exports =  {
     // 入口文件
     entry: ['./app/index.js'],
     // 指定变异后的代码路径 dist/bundle.js
@@ -9,15 +9,11 @@ var config = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
     },
-    // loader配置
     module: {
         rules: [{
-            test: /\.js$/,
-            uses: ['babel-loader'],
+            test: /\.(js|jsx)$/,
+            use: ['babel-loader'],
             exclude: /node_modules/
         }]
-    },
-
-}
-
-module.exports = config;
+    }
+};
