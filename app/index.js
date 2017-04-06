@@ -1,3 +1,10 @@
-var component = require('./component');
+import React from 'react';
+import { render } from 'react-dom';
+import HelloWorld from './js/components/HelloWorld';
 
-document.body.appendChild(component());
+render(
+    <HelloWorld/>,
+    document.getElementById('app')
+);
+
+console.log('HelloWorld');
