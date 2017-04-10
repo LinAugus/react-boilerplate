@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const APP_DIR   = path.resolve(__dirname, 'app/index.js');
 const BUILD_DIR = path.resolve(__dirname, 'dist');
@@ -18,7 +19,7 @@ let config = {
     },
     output: {
         path: BUILD_DIR,
-        filename: '[name].[hash].min.js',
+        filename: '[name].min.js',
         publicPath: '/'
     },
     resolve: {
@@ -34,11 +35,16 @@ let config = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader?modules', 'postcss-loader']
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'postcss-loader']
+                })
             }
         ]
     },
     plugins: [
+        new ExtractTextPlugin('css/styles.css'),
+
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'app/index.html')
         }),
