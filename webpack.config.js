@@ -1,15 +1,19 @@
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const APP_DIR   = path.resolve(__dirname, 'app/index.js');
 const BUILD_DIR = path.resolve(__dirname, 'dist');
 
 let config = {
-    devtool: 'inline-source-map',
-    entry: ['webpack-dev-server/client?http://localhost:9999', APP_DIR],
+    devtool: 'eval-source-map',
+    entry: {
+        'index': ['webpack-dev-server/client?http://localhost:9999/', APP_DIR],
+        vendor: ['react', 'react-dom', 'react-router'],
+    },
     output: {
         path: BUILD_DIR,
-        filename: 'bundle.js',
+        filename: '[name].[hash].min.js',
         publicPath: 'http://localhost:9999'
     },
     resolve: {
@@ -19,7 +23,7 @@ let config = {
         rules: [
             {
                 test: /\.js|jsx$/,
-                use: 'babel-loader',
+                loader: 'babel-loader',
                 exclude: /node_modules/
             },
             {
@@ -29,7 +33,10 @@ let config = {
         ]
     },
     plugins: [
-        new webpack.NamedModulesPlugin()
+        new webpack.NamedModulesPlugin(),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'app/index.html')
+        })
     ]
 };
 

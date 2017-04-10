@@ -1,11 +1,15 @@
 "use strict";
 
 const Webpack = require("webpack");
+const path = require("path");
 const WebpackDevServer = require("webpack-dev-server");
 const webpackConfig = require("./webpack.config.js");
 
 const compiler = Webpack(webpackConfig);
 const server = new WebpackDevServer(compiler, {
+    contentBase: path.join(__dirname, 'dist'),
+    publicPath: '/',
+    watchContentBase: true,
     stats: {
         colors: true
     }

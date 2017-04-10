@@ -6,5 +6,3 @@ render(
     <HelloWorld/>,
     document.getElementById('app')
 );
-
-console.log('HelloWorld');
