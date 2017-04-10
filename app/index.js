@@ -2,9 +2,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import 'react-hot-loader/patch';
-import HelloWorld from './js/components/HelloWorld';
+import App from './js/container/App';
 
-const hotRender = (Component) => {
+const renderApp = (Component) => {
     render(
         <AppContainer>
             <Component />
@@ -13,10 +13,10 @@ const hotRender = (Component) => {
     )
 }
 
-hotRender(HelloWorld);
+renderApp(App);
 
 if (module.hot) {
-    module.hot.accept('./js/components/HelloWorld', () => {
-        hotRender(HelloWorld)
+    module.hot.accept('./js/container/App', () => {
+        renderApp(App)
     });
 }

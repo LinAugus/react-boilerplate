@@ -23,7 +23,10 @@ let config = {
         publicPath: '/'
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        alias: {
+                components: path.join(__dirname, '/app/js/components')
+            }
     },
     module: {
         rules: [
