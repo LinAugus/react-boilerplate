@@ -8,8 +8,11 @@ const webpackConfig = require("./webpack.config.js");
 const compiler = Webpack(webpackConfig);
 const server = new WebpackDevServer(compiler, {
     contentBase: path.join(__dirname, 'dist'),
-    publicPath: '/',
-    watchContentBase: true,
+    publicPath: webpackConfig.output.publicPath,
+    historyApiFallback: true,
+    hot: true,
+    noInfo: true,
+    overlay: true,
     stats: {
         colors: true
     }
